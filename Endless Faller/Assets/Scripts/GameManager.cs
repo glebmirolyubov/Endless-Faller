@@ -22,6 +22,14 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         platformsPooler = PlatformsPooler.Instance;
+
+        StartCoroutine("LateStart");
+    }
+
+    IEnumerator LateStart()
+    {
+        yield return new WaitForSeconds(0.1f);
+        SpawnFirstMovingPlatform();
     }
 
     public void Play()
@@ -34,6 +42,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("Loading game!");
         yield return new WaitForSeconds(14);
         EditorSceneManager.LoadScene(sceneName);
+    }
+
+    private void SpawnFirstMovingPlatform()
+    {
+        platformsPooler.SpawnFromPool("Platform", new Vector3(0f, -5f, 0f), Quaternion.identity);
     }
 
     // ---------------- Static Section ---------------- //

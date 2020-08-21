@@ -275,7 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pools:
-  - tag: Moving Platform
+  - tag: Platform
     prefab: {fileID: 1367811301945011629, guid: 2b321147b35d46a4ea93e65b0c94e43f,
       type: 3}
     size: 5

@@ -1,0 +1,17 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(menuName = "Scriptable Objects/GameSettingsSO", fileName = "GameSettingsSO.asset")]
+[System.Serializable]
+public class GameSettingsScriptableObject : ScriptableObject
+{
+    static public GameSettingsScriptableObject Instance; // This Scriptable Object is an unprotected Singleton
+
+    public GameSettingsScriptableObject()
+    {
+        Instance = this; // Assign the Singleton as part of the constructor.
+    }
+
+    public float initialSpawnRate;
+}
