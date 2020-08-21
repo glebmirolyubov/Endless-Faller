@@ -25,22 +25,18 @@ public class MainCharacter : MonoBehaviour
 
     [SerializeField]
     private float speed;
-    Rigidbody rb;
 
     void Awake()
     {
         S = this;
-
-        rb = GetComponent<Rigidbody>();
     }
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void FixedUpdate()
+    {
+        MovePlayer();
+    }
+
+    void MovePlayer()
     {
         if (Input.GetKey(KeyCode.LeftArrow))
         {
