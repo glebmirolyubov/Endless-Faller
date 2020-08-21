@@ -10,9 +10,12 @@ public class GameManager : MonoBehaviour
     // Private Singleton-style instance. Accessed by static property Instance later in script
     static private GameManager _Instance;
 
+    public GameSettingsScriptableObject gameSettingsSO;
+
     [SerializeField]
     private string gameScene;
     private PlatformsPooler platformsPooler;
+    private float spawnRate;
 
     private void Awake()
     {
@@ -23,7 +26,19 @@ public class GameManager : MonoBehaviour
     {
         platformsPooler = PlatformsPooler.Instance;
 
+        spawnRate = gameSettingsSO.initialSpawnRate;
+
         StartCoroutine("LateStart");
+    }
+
+    private void Update()
+    {
+        spawnRate -= Time.deltaTime;
+        if (spawnRate < 0)
+        {
+            platformsPooler.SpawnFromPool("Platform", new Vector3(0f, -7.5f, 0f), Quaternion.identity);
+            spawnRate = gameSettingsSO.initialSpawnRate;
+        }
     }
 
     IEnumerator LateStart()
