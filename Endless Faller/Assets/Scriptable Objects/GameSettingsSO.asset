@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3dc9c3697f3041a3bc5336c5d03c061, type: 3}
   m_Name: GameSettingsSO
   m_EditorClassIdentifier: 
-  initialSpawnRate: 2
+  initialSpawnRate: 1.5
+  platformGap: 2

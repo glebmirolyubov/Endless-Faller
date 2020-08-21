@@ -57,6 +57,10 @@ public class MainCharacter : MonoBehaviour
             return;
         }
 
-        Debug.Log("Player has left the screen, so Game Over");
+        if (other.gameObject.CompareTag("Screen Bounds"))
+        {
+            Debug.Log("Player has left the screen, so Game Over");
+        }
+
     }
 }

@@ -94,4 +94,16 @@ public class GameManager : MonoBehaviour
             _Instance = value;
         }
     }
+
+    static public GameSettingsScriptableObject GameSettingsSO
+    {
+        get
+        {
+            if (Instance != null)
+            {
+                return Instance.gameSettingsSO;
+            }
+            return null;
+        }
+    }
 }
