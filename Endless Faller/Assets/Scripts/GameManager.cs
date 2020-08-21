@@ -7,14 +7,21 @@ using UnityEditor.SceneManagement;
 /// <summary> Manages the state of the whole application </summary>
 public class GameManager : MonoBehaviour
 {
-    // Private Singleton-style instance. Accessed by static property S later in script
-    static private GameManager _S;
+    // Private Singleton-style instance. Accessed by static property Instance later in script
+    static private GameManager _Instance;
 
-    [SerializeField] private string gameScene;
+    [SerializeField]
+    private string gameScene;
+    private PlatformsPooler platformsPooler;
 
     private void Awake()
     {
-        S = this;
+        Instance = this;
+    }
+
+    private void Start()
+    {
+        platformsPooler = PlatformsPooler.Instance;
     }
 
     public void Play()
@@ -32,31 +39,31 @@ public class GameManager : MonoBehaviour
     // ---------------- Static Section ---------------- //
 
     /// <summary>
-    /// <para>This static public property provides some protection for the Singleton _S.</para>
+    /// <para>This static public property provides some protection for the Singleton _Instance.</para>
     /// <para>get {} does return null, but throws an error first.</para>
-    /// <para>set {} allows overwrite of _S by a 2nd instance, but throws an error first.</para>
+    /// <para>set {} allows overwrite of _Instance by a 2nd instance, but throws an error first.</para>
     /// <para>Another advantage of using a property here is that it allows you to place
     /// a breakpoint in the set clause and then look at the call stack if you fear that 
-    /// something random is setting your _S value.</para>
+    /// something random is setting your _Instance value.</para>
     /// </summary>
-    static private GameManager S
+    static public GameManager Instance
     {
         get
         {
-            if (_S == null)
+            if (_Instance == null)
             {
-                Debug.LogError("GameManager:S getter - Attempt to get value of S before it has been set.");
+                Debug.LogError("GameManager:Instance getter - Attempt to get value of Instance before it has been set.");
                 return null;
             }
-            return _S;
+            return _Instance;
         }
         set
         {
-            if (_S != null)
+            if (_Instance != null)
             {
-                Debug.LogError("GameManager:S setter - Attempt to set S when it has already been set.");
+                Debug.LogError("GameManager:Instance setter - Attempt to set Instance when it has already been set.");
             }
-            _S = value;
+            _Instance = value;
         }
     }
 }

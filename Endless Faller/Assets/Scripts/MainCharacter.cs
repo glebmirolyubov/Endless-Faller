@@ -6,20 +6,20 @@ using UnityEngine;
 public class MainCharacter : MonoBehaviour
 {
     // Private singleton for MainCharacter
-    static private MainCharacter _S;
-    static public MainCharacter S
+    static private MainCharacter _Instance;
+    static public MainCharacter Instance
     {
         get
         {
-            return _S;
+            return _Instance;
         }
         private set
         {
-            if (_S != null)
+            if (_Instance != null)
             {
                 Debug.LogWarning("Second attempt to set PlayerShip singleton _S.");
             }
-            _S = value;
+            _Instance = value;
         }
     }
 
@@ -28,7 +28,7 @@ public class MainCharacter : MonoBehaviour
 
     void Awake()
     {
-        S = this;
+        Instance = this;
     }
 
     void FixedUpdate()
