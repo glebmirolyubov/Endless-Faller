@@ -7,21 +7,6 @@ public class MainCharacter : MonoBehaviour
 {
     // Private singleton for MainCharacter
     static private MainCharacter _Instance;
-    static public MainCharacter Instance
-    {
-        get
-        {
-            return _Instance;
-        }
-        private set
-        {
-            if (_Instance != null)
-            {
-                Debug.LogWarning("Second attempt to set PlayerShip singleton _S.");
-            }
-            _Instance = value;
-        }
-    }
 
     [SerializeField]
     private float speed;
@@ -79,6 +64,34 @@ public class MainCharacter : MonoBehaviour
         if (other.gameObject.CompareTag("Platform"))
         {
             LevelManager.Instance.IncrementScore();
+        }
+    }
+
+    // ---------------- Static Section ---------------- //
+
+    /// <summary>
+    /// <para>This static public property provides some protection for the Singleton _Instance.</para>
+    /// <para>get {} does return null, but throws an error first.</para>
+    /// <para>set {} allows overwrite of _Instance by a 2nd instance, but throws an error first.</para>
+    /// </summary>
+    static public MainCharacter Instance
+    {
+        get
+        {
+            if (_Instance == null)
+            {
+                Debug.LogError("MainCharacter:Instance getter - Attempt to get value of Instance before it has been set.");
+                return null;
+            }
+            return _Instance;
+        }
+        private set
+        {
+            if (_Instance != null)
+            {
+                Debug.LogError("MainCharacter:Instance setter - Attempt to set Instance when it has already been set.");
+            }
+            _Instance = value;
         }
     }
 }

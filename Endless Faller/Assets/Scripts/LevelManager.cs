@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour
     [Header("Set in inspector")]
     public Text scoreText;
     public Text gameOverScoreText;
+    public Text highScoreText;
     public GameObject gameOverPanel;
     public GameObject pausePanel;
 
@@ -27,6 +28,7 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         gameOverPanel.SetActive(false);
+        pausePanel.SetActive(false);
         canPause = true;
     }
 
@@ -61,8 +63,11 @@ public class LevelManager : MonoBehaviour
 
     public void GameOver()
     {
+        SaveGameManager.CheckHighScore(Score);
+        SaveGameManager.Save();
         Time.timeScale = 0;
         canPause = false;
+        highScoreText.text = "HIGHSCORE: " + SaveGameManager.GetHighScore();
         gameOverScoreText.text = "SCORE: " + Score.ToString();
         gameOverPanel.SetActive(true);
     }
@@ -84,9 +89,6 @@ public class LevelManager : MonoBehaviour
     /// <para>This static public property provides some protection for the Singleton _Instance.</para>
     /// <para>get {} does return null, but throws an error first.</para>
     /// <para>set {} allows overwrite of _Instance by a 2nd instance, but throws an error first.</para>
-    /// <para>Another advantage of using a property here is that it allows you to place
-    /// a breakpoint in the set clause and then look at the call stack if you fear that 
-    /// something random is setting your _Instance value.</para>
     /// </summary>
     static public LevelManager Instance
     {

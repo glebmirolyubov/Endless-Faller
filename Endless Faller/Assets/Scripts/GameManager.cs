@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
         spawnRate = gameSettingsSO.initialSpawnRate;
 
         StartCoroutine("LateStart");
+
+        SaveGameManager.Load();
     }
 
     private void Update()
