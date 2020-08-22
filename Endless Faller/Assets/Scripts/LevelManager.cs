@@ -11,7 +11,10 @@ public class LevelManager : MonoBehaviour
 
     public int Score { get; private set; }
 
+    [Header("Set in inspector")]
     public Text scoreText;
+    public Text gameOverScoreText;
+    public GameObject gameOverPanel;
 
     private void Awake()
     {
@@ -28,10 +31,19 @@ public class LevelManager : MonoBehaviour
         Score++;
     }
 
+    public void GameOver()
+    {
+        Time.timeScale = 0;
+
+        gameOverScoreText.text = "SCORE: " + Score.ToString();
+
+        gameOverPanel.SetActive(true);
+    }
+
     public void Reset()
     {
+        Time.timeScale = 1;
         Score = 0;
-        // reset logic
     }
 
     // ---------------- Static Section ---------------- //

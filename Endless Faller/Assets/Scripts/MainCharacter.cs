@@ -59,7 +59,7 @@ public class MainCharacter : MonoBehaviour
 
         if (other.gameObject.CompareTag("Screen Bounds"))
         {
-            Debug.Log("Player has left the screen, so Game Over");
+            LevelManager.Instance.GameOver();
         }
 
         if (other.gameObject.CompareTag("Platform"))
