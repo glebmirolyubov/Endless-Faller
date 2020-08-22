@@ -15,6 +15,9 @@ public class LevelManager : MonoBehaviour
     public Text scoreText;
     public Text gameOverScoreText;
     public GameObject gameOverPanel;
+    public GameObject pausePanel;
+
+    private bool canPause;
 
     private void Awake()
     {
@@ -24,11 +27,17 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         gameOverPanel.SetActive(false);
+        canPause = true;
     }
 
     private void Update()
     {
         scoreText.text = "Score: " + Score.ToString();
+
+        if (Input.GetKeyDown(KeyCode.Escape) && canPause)
+        {
+            PauseGame();
+        }
     }
 
     public void IncrementScore()
@@ -36,23 +45,36 @@ public class LevelManager : MonoBehaviour
         Score++;
     }
 
+    public void PauseGame()
+    {
+        if (Time.timeScale == 1)
+        {
+            Time.timeScale = 0;
+            pausePanel.SetActive(true);
+        }
+        else
+        {
+            Time.timeScale = 1;
+            pausePanel.SetActive(false);
+        }
+    }
+
     public void GameOver()
     {
         Time.timeScale = 0;
-
+        canPause = false;
         gameOverScoreText.text = "SCORE: " + Score.ToString();
-
         gameOverPanel.SetActive(true);
     }
 
     public void ResetScene()
     {
-        MainCharacter.Instance.SetCharacterStartingPosition();
+        MainCharacter.Instance.SetCharacterStartState();
         Score = 0;
         gameOverPanel.SetActive(false);
         PlatformsPooler.Instance.DespawnAll();
         GameManager.Instance.SpawnFirstMovingPlatform();
-
+        canPause = true;
         Time.timeScale = 1;
     }
 

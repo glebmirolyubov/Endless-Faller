@@ -25,6 +25,7 @@ public class MainCharacter : MonoBehaviour
 
     [SerializeField]
     private float speed;
+    private Rigidbody rb;
 
     private void Awake()
     {
@@ -33,7 +34,9 @@ public class MainCharacter : MonoBehaviour
 
     private void Start()
     {
-        SetCharacterStartingPosition();
+        rb = GetComponent<Rigidbody>();
+
+        SetCharacterStartState();
     }
 
     private void FixedUpdate()
@@ -53,9 +56,10 @@ public class MainCharacter : MonoBehaviour
         }
     }
 
-    public void SetCharacterStartingPosition()
+    public void SetCharacterStartState()
     {
         transform.position = GameManager.Instance.gameSettingsSO.playerStartPosition;
+        rb.velocity = Vector3.zero;
     }
 
     // This is called whenever the Player exits the bounds of OnScreenBounds
