@@ -62,5 +62,9 @@ public class MainCharacter : MonoBehaviour
             Debug.Log("Player has left the screen, so Game Over");
         }
 
+        if (other.gameObject.CompareTag("Platform"))
+        {
+            LevelManager.Instance.IncrementScore();
+        }
     }
 }

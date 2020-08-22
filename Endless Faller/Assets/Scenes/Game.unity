@@ -964,7 +964,7 @@ GameObject:
   - component: {fileID: 1999660169}
   - component: {fileID: 1999660168}
   m_Layer: 0
-  m_Name: LevelManager
+  m_Name: Level Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -982,6 +982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e137bd3ce4201df4d9ffeab9dfc520d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreText: {fileID: 1139797786}
 --- !u!4 &1999660169
 Transform:
   m_ObjectHideFlags: 0
