@@ -21,6 +21,11 @@ public class LevelManager : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        gameOverPanel.SetActive(false);
+    }
+
     private void Update()
     {
         scoreText.text = "Score: " + Score.ToString();
@@ -40,10 +45,15 @@ public class LevelManager : MonoBehaviour
         gameOverPanel.SetActive(true);
     }
 
-    public void Reset()
+    public void ResetScene()
     {
-        Time.timeScale = 1;
+        MainCharacter.Instance.SetCharacterStartingPosition();
         Score = 0;
+        gameOverPanel.SetActive(false);
+        PlatformsPooler.Instance.DespawnAll();
+        GameManager.Instance.SpawnFirstMovingPlatform();
+
+        Time.timeScale = 1;
     }
 
     // ---------------- Static Section ---------------- //

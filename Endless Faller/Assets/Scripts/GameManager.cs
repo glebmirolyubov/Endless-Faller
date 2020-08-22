@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEditor;
-using UnityEditor.SceneManagement;
 
 /// <summary> Manages the state of the whole application </summary>
 public class GameManager : MonoBehaviour
@@ -12,8 +11,6 @@ public class GameManager : MonoBehaviour
 
     public GameSettingsScriptableObject gameSettingsSO;
 
-    [SerializeField]
-    private string gameScene;
     private PlatformsPooler platformsPooler;
     private float spawnRate;
 
@@ -47,19 +44,7 @@ public class GameManager : MonoBehaviour
         SpawnFirstMovingPlatform();
     }
 
-    public void Play()
-    {
-        StartCoroutine(LoadScene(gameScene));
-    }
-
-    private IEnumerator LoadScene(string sceneName)
-    {
-        Debug.Log("Loading game!");
-        yield return new WaitForSeconds(14);
-        EditorSceneManager.LoadScene(sceneName);
-    }
-
-    private void SpawnFirstMovingPlatform()
+    public void SpawnFirstMovingPlatform()
     {
         platformsPooler.SpawnFromPool("Platform", new Vector3(0f, -5f, 0f), Quaternion.identity);
     }

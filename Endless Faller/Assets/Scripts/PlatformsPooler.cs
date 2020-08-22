@@ -52,6 +52,16 @@ public class PlatformsPooler : MonoBehaviour
         return objectToSpawn;
     }
 
+    public void DespawnAll()
+    {
+        GameObject[] pooledObjects = GameObject.FindGameObjectsWithTag("Platform");
+
+        foreach(GameObject objectToDisable in pooledObjects)
+        {
+            objectToDisable.SetActive(false);
+        }
+    }
+
     // ---------------- Static Section ---------------- //
 
     /// <summary>

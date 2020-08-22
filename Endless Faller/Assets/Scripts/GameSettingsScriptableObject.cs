@@ -13,7 +13,9 @@ public class GameSettingsScriptableObject : ScriptableObject
         Instance = this; // Assign the Singleton as part of the constructor.
     }
 
+    [Header("Set in inspector")]
     public float initialSpawnRate = 2f;
     [Range(1.5f, 4f)]
     public float platformGap = 2f;
+    public Vector3 playerStartPosition;
 }

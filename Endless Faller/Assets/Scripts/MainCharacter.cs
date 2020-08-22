@@ -26,17 +26,22 @@ public class MainCharacter : MonoBehaviour
     [SerializeField]
     private float speed;
 
-    void Awake()
+    private void Awake()
     {
         Instance = this;
     }
 
-    void FixedUpdate()
+    private void Start()
+    {
+        SetCharacterStartingPosition();
+    }
+
+    private void FixedUpdate()
     {
         MovePlayer();
     }
 
-    void MovePlayer()
+    private void MovePlayer()
     {
         if (Input.GetKey(KeyCode.LeftArrow))
         {
@@ -46,6 +51,11 @@ public class MainCharacter : MonoBehaviour
         {
             transform.position += Vector3.right * speed;
         }
+    }
+
+    public void SetCharacterStartingPosition()
+    {
+        transform.position = GameManager.Instance.gameSettingsSO.playerStartPosition;
     }
 
     // This is called whenever the Player exits the bounds of OnScreenBounds
