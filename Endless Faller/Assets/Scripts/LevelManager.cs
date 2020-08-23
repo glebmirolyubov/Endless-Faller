@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour
     public Text highScoreText;
     public GameObject gameOverPanel;
     public GameObject pausePanel;
+    public GameObject startPanel;
 
     private bool canPause;
 
@@ -26,14 +27,17 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        gameOverPanel.SetActive(false);
-        pausePanel.SetActive(false);
-        canPause = true;
+        PrepareSceneForPlay();
     }
 
     private void Update()
     {
         scoreText.text = "Score: " + Score.ToString();
+
+        if (Input.anyKeyDown && startPanel.activeInHierarchy)
+        {
+            StartGameAfterAnyKeyPressed();
+        }
 
         if (Input.GetKeyDown(KeyCode.Escape) && canPause)
         {
@@ -79,14 +83,29 @@ public class LevelManager : MonoBehaviour
         PlatformsPooler.Instance.DespawnAll();
         GameManager.Instance.ResetValues();
         GameManager.Instance.SpawnFirstMovingPlatform();
-        canPause = true;
-        Time.timeScale = 1;
+        startPanel.SetActive(true);
     }
 
     public void LoadMenuScene()
     {
         Time.timeScale = 1;
         SceneManager.LoadScene(0);
+    }
+
+    void StartGameAfterAnyKeyPressed()
+    {
+        startPanel.SetActive(false);
+        canPause = true;
+        Time.timeScale = 1;
+    }
+
+    void PrepareSceneForPlay()
+    {
+        gameOverPanel.SetActive(false);
+        pausePanel.SetActive(false);
+        startPanel.SetActive(true);
+        canPause = false;
+        Time.timeScale = 0;
     }
 
     // ---------------- Static Section ---------------- //

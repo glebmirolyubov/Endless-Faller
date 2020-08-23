@@ -1888,7 +1888,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1318581073
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2641,6 +2641,7 @@ MonoBehaviour:
   highScoreText: {fileID: 401244148}
   gameOverPanel: {fileID: 760800502}
   pausePanel: {fileID: 54916271}
+  startPanel: {fileID: 1318581072}
 --- !u!4 &1999660169
 Transform:
   m_ObjectHideFlags: 0

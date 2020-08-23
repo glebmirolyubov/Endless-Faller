@@ -20,19 +20,16 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        SaveGameManager.Load();
     }
 
     private void Start()
     {
         platformsPooler = PlatformsPooler.Instance;
 
-        currentSpawnRate = gameSettingsSO.initialSpawnRate;
-        spawnRate = gameSettingsSO.initialSpawnRate;
-        platformSpeed = gameSettingsSO.initialPlatformSpeed;
+        ResetValues();
 
         StartCoroutine("LateStart");
-
-        SaveGameManager.Load();
     }
 
     private void Update()
@@ -50,7 +47,7 @@ public class GameManager : MonoBehaviour
 
     public void SpawnFirstMovingPlatform()
     {
-        platformsPooler.SpawnFromPool("Platform", new Vector3(0f, -5f, 0f), Quaternion.identity);
+        platformsPooler.SpawnFromPool("Platform", new Vector3(0f, -7f, 0f), Quaternion.identity);
     }
 
     void SpawnMovingPlatform()
@@ -58,7 +55,7 @@ public class GameManager : MonoBehaviour
         currentSpawnRate -= Time.deltaTime;
         if (currentSpawnRate < 0)
         {
-            platformsPooler.SpawnFromPool("Platform", new Vector3(0f, -7.5f, 0f), Quaternion.identity);
+            platformsPooler.SpawnFromPool("Platform", new Vector3(0f, -7f, 0f), Quaternion.identity);
             currentSpawnRate = spawnRate;
         }
     }
