@@ -1,6 +1,6 @@
 # Endless-Faller README
 
-*completed by Gleb Mirolyubov, 2019* 
+*completed by Gleb Mirolyubov, 2020* 
 
 Made using Unity 2019.4.8f1
 
