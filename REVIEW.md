@@ -1,6 +1,6 @@
 # Review of Endless Faller project
 
-*completed by Gleb Mirolyubov, 2019* 
+*completed by Gleb Mirolyubov, 2020* 
 
 ## What I learned
 While developing Endless Faller, I have learned how powerful and handy some programming pattern may be. For example, On many classes in the game I use Singleton programming pattern, which essentially allows for the creation of instance variable, which can be accessed from anywhere in the game (if public). This is very handy as it allows to not create a reference to the script. Newly instantiated objects, such as MovingPlatform, can access the instance during runtime.
