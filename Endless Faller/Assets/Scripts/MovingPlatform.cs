@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class MovingPlatform : MonoBehaviour
 {
@@ -7,15 +6,13 @@ public class MovingPlatform : MonoBehaviour
 
     public Transform leftPlatformAnchor, rightPlatformAnchor;
 
-    [SerializeField]
     private float speed;
-    private float platformGap;
 
     private void OnEnable()
     {
-        platformGap = GameManager.Instance.gameSettingsSO.initialPlatformGap;
+        speed = GameManager.Instance.IncreasePlatformsSpeed();
 
-        RandomlyGeneratePlatformShape();
+        RandomlyGeneratePlatformShape(GameManager.Instance.gameSettingsSO.initialPlatformGap);
     }
 
     private void FixedUpdate()
@@ -23,7 +20,7 @@ public class MovingPlatform : MonoBehaviour
         transform.position += Vector3.up * speed;
     }
 
-    private void RandomlyGeneratePlatformShape()
+    private void RandomlyGeneratePlatformShape(float platformGap)
     {
         float platformLengthAllowance = TOTAL_PLATFORM_WIDTH - platformGap;
 
@@ -32,14 +29,6 @@ public class MovingPlatform : MonoBehaviour
 
         leftPlatformAnchor.localScale = new Vector3(leftPlatformLength, 1f, 1f);
         rightPlatformAnchor.localScale = new Vector3(rightPlatformLength, 1f, 1f);
-    }
-
-    // Wait for some time before disabling the platform after it escapes play area bounds
-    // So that it would look nice on the screen to the player.
-    IEnumerator DisableGameObject()
-    {
-        yield return new WaitForSeconds(1.5f);
-        gameObject.SetActive(false);
     }
 
     // This is called whenever the Player exits the bounds of OnScreenBounds

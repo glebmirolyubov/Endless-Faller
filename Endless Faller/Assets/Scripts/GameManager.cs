@@ -1,7 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEditor;
 
 /// <summary> Manages the state of the whole application </summary>
 public class GameManager : MonoBehaviour
@@ -10,12 +8,14 @@ public class GameManager : MonoBehaviour
     static private GameManager _Instance;
 
     const float LOWEST_SPAWN_RATE = 0.7f;
+    const float MAX_PLATFORM_SPEED = 1f;
 
     public GameSettingsScriptableObject gameSettingsSO;
 
     private PlatformsPooler platformsPooler;
     private float currentSpawnRate;
     private float spawnRate;
+    private float platformSpeed;
 
     private void Awake()
     {
@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
 
         currentSpawnRate = gameSettingsSO.initialSpawnRate;
         spawnRate = gameSettingsSO.initialSpawnRate;
+        platformSpeed = gameSettingsSO.initialPlatformSpeed;
 
         StartCoroutine("LateStart");
 
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
     {
         SpawnMovingPlatform();
         DecreaseSpawnRateOfPlatforms();
+        IncreasePlatformsSpeed();
     }
 
     IEnumerator LateStart()
@@ -64,7 +66,19 @@ public class GameManager : MonoBehaviour
     void DecreaseSpawnRateOfPlatforms()
     {
         spawnRate = Mathf.Clamp(spawnRate - gameSettingsSO.spawnRateDecreasePerFrame * Time.deltaTime, LOWEST_SPAWN_RATE, gameSettingsSO.initialSpawnRate);
+    }
 
+    public float IncreasePlatformsSpeed()
+    {
+        platformSpeed = Mathf.Clamp(platformSpeed + gameSettingsSO.platformSpeedIncreasePerFrame * Time.deltaTime, gameSettingsSO.initialPlatformSpeed, MAX_PLATFORM_SPEED);
+        return platformSpeed;
+    }
+
+    public void ResetValues()
+    {
+        currentSpawnRate = gameSettingsSO.initialSpawnRate;
+        spawnRate = gameSettingsSO.initialSpawnRate;
+        platformSpeed = gameSettingsSO.initialPlatformSpeed;
     }
 
     // ---------------- Static Section ---------------- //

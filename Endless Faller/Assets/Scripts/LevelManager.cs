@@ -77,6 +77,7 @@ public class LevelManager : MonoBehaviour
         Score = 0;
         gameOverPanel.SetActive(false);
         PlatformsPooler.Instance.DespawnAll();
+        GameManager.Instance.ResetValues();
         GameManager.Instance.SpawnFirstMovingPlatform();
         canPause = true;
         Time.timeScale = 1;

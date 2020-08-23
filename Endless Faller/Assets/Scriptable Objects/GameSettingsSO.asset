@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3dc9c3697f3041a3bc5336c5d03c061, type: 3}
   m_Name: GameSettingsSO
   m_EditorClassIdentifier: 
-  playerStartPosition: {x: 0, y: 5, z: 0}
+  playerStartPosition: {x: 0, y: 4, z: 0}
   initialSpawnRate: 1.5
-  spawnRateDecreasePerFrame: 0.01
+  spawnRateDecreasePerFrame: 0.05
   initialPlatformGap: 2
-  platformSpeedIncreasePerFrame: 0.1
+  initialPlatformSpeed: 0.05
+  platformSpeedIncreasePerFrame: 0.001
