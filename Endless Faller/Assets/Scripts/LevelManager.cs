@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /// <summary> Manages the state of the level </summary>
 public class LevelManager : MonoBehaviour
@@ -81,6 +80,11 @@ public class LevelManager : MonoBehaviour
         GameManager.Instance.SpawnFirstMovingPlatform();
         canPause = true;
         Time.timeScale = 1;
+    }
+
+    public void LoadMenuScene()
+    {
+        SceneManager.LoadScene(0);
     }
 
     // ---------------- Static Section ---------------- //

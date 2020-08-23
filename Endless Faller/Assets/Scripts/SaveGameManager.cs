@@ -99,5 +99,5 @@ static public class SaveGameManager
 //[System.Serializable]
 public class SaveFile
 {
-    public int highScore;
+    public int highScore = 0;
 }
