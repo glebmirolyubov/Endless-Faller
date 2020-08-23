@@ -13,7 +13,7 @@ public class MovingPlatform : MonoBehaviour
 
     private void OnEnable()
     {
-        platformGap = GameManager.Instance.gameSettingsSO.platformGap;
+        platformGap = GameManager.Instance.gameSettingsSO.initialPlatformGap;
 
         RandomlyGeneratePlatformShape();
     }
@@ -53,7 +53,7 @@ public class MovingPlatform : MonoBehaviour
 
         if (other.gameObject.CompareTag("Screen Bounds"))
         {
-            StartCoroutine("DisableGameObject");
+            gameObject.SetActive(false);
         }
     }
 }

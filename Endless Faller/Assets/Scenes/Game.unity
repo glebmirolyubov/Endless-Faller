@@ -951,7 +951,7 @@ MonoBehaviour:
   - tag: Platform
     prefab: {fileID: 1367811301945011629, guid: 2b321147b35d46a4ea93e65b0c94e43f,
       type: 3}
-    size: 6
+    size: 10
 --- !u!1 &654332437
 GameObject:
   m_ObjectHideFlags: 0

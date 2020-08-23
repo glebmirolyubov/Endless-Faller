@@ -9,9 +9,12 @@ public class GameManager : MonoBehaviour
     // Private Singleton-style instance. Accessed by static property Instance later in script
     static private GameManager _Instance;
 
+    const float LOWEST_SPAWN_RATE = 0.7f;
+
     public GameSettingsScriptableObject gameSettingsSO;
 
     private PlatformsPooler platformsPooler;
+    private float currentSpawnRate;
     private float spawnRate;
 
     private void Awake()
@@ -23,6 +26,7 @@ public class GameManager : MonoBehaviour
     {
         platformsPooler = PlatformsPooler.Instance;
 
+        currentSpawnRate = gameSettingsSO.initialSpawnRate;
         spawnRate = gameSettingsSO.initialSpawnRate;
 
         StartCoroutine("LateStart");
@@ -32,23 +36,35 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        spawnRate -= Time.deltaTime;
-        if (spawnRate < 0)
-        {
-            platformsPooler.SpawnFromPool("Platform", new Vector3(0f, -7.5f, 0f), Quaternion.identity);
-            spawnRate = gameSettingsSO.initialSpawnRate;
-        }
+        SpawnMovingPlatform();
+        DecreaseSpawnRateOfPlatforms();
     }
 
     IEnumerator LateStart()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.01f);
         SpawnFirstMovingPlatform();
     }
 
     public void SpawnFirstMovingPlatform()
     {
         platformsPooler.SpawnFromPool("Platform", new Vector3(0f, -5f, 0f), Quaternion.identity);
+    }
+
+    void SpawnMovingPlatform()
+    {
+        currentSpawnRate -= Time.deltaTime;
+        if (currentSpawnRate < 0)
+        {
+            platformsPooler.SpawnFromPool("Platform", new Vector3(0f, -7.5f, 0f), Quaternion.identity);
+            currentSpawnRate = spawnRate;
+        }
+    }
+
+    void DecreaseSpawnRateOfPlatforms()
+    {
+        spawnRate = Mathf.Clamp(spawnRate - gameSettingsSO.spawnRateDecreasePerFrame * Time.deltaTime, LOWEST_SPAWN_RATE, gameSettingsSO.initialSpawnRate);
+
     }
 
     // ---------------- Static Section ---------------- //
