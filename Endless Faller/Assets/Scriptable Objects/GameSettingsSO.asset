@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStartPosition: {x: 0, y: 4, z: 0}
   initialSpawnRate: 1.5
-  spawnRateDecreasePerFrame: 0.05
+  spawnRateDecreasePerFrame: 0.0274
   initialPlatformGap: 2
   initialPlatformSpeed: 0.05
-  platformSpeedIncreasePerFrame: 0.001
+  platformSpeedIncreasePerFrame: 0.000555

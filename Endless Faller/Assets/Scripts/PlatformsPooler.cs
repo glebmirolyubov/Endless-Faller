@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class PlatformsPooler : MonoBehaviour
@@ -99,6 +98,6 @@ public class PlatformsPooler : MonoBehaviour
 public class Pool
 {
     public string tag;
-    public GameObject prefab;
+    public UnityEngine.GameObject prefab;
     public int size;
 }

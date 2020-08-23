@@ -32,7 +32,7 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        scoreText.text = "Score: " + Score.ToString();
+        scoreText.text = "SCORE: " + Score.ToString();
 
         if (Input.anyKeyDown && startPanel.activeInHierarchy)
         {
@@ -83,6 +83,7 @@ public class LevelManager : MonoBehaviour
         PlatformsPooler.Instance.DespawnAll();
         GameManager.Instance.ResetValues();
         GameManager.Instance.SpawnFirstMovingPlatform();
+        MainCharacter.Instance.highscoreEffectPrefab.SetActive(false);
         startPanel.SetActive(true);
     }
 

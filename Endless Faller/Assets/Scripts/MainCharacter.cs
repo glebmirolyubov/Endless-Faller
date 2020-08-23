@@ -8,8 +8,10 @@ public class MainCharacter : MonoBehaviour
     // Private singleton for MainCharacter
     static private MainCharacter _Instance;
 
+    public GameObject highscoreEffectPrefab;
+
     [SerializeField]
-    private float speed;
+    private float speed = 0.2f;
     private Rigidbody rb;
 
     private void Awake()
@@ -64,6 +66,11 @@ public class MainCharacter : MonoBehaviour
         if (other.gameObject.CompareTag("Platform"))
         {
             LevelManager.Instance.IncrementScore();
+
+            if (SaveGameManager.CheckHighScore(LevelManager.Instance.Score))
+            {
+                highscoreEffectPrefab.SetActive(true);
+            }
         }
     }
 
