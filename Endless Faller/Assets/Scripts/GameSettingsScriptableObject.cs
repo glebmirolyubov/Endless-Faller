@@ -16,7 +16,6 @@ public class GameSettingsScriptableObject : ScriptableObject
     public float initialSpawnRate = 2f;
     [Range(0.001f, 0.05f)]
     public float spawnRateDecreasePerFrame;
-    [Range(1.5f, 4f)]
     public float initialPlatformGap = 2f;
     public float initialPlatformSpeed;
     [Range(0f, 0.001f)]

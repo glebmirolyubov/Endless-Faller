@@ -1,8 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// <para>This class is using a Pooling technique to spawn moving platforms.</para>
+/// <para>Pooling is more efficient that creating and destroying objects all the time.</para>
+/// </summary>
 public class PlatformsPooler : MonoBehaviour
 {
+    public Transform platformsParent;
     public List<Pool> pools;
     public Dictionary<string, Queue<GameObject>> poolDictionary;
 
@@ -23,7 +28,7 @@ public class PlatformsPooler : MonoBehaviour
 
             for(int i = 0; i < pool.size; i++)
             {
-                GameObject obj = Instantiate(pool.prefab);
+                GameObject obj = Instantiate(pool.prefab, platformsParent);
                 obj.SetActive(false);
                 objectPool.Enqueue(obj);
             }

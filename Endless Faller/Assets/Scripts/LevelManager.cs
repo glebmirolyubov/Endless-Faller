@@ -50,6 +50,9 @@ public class LevelManager : MonoBehaviour
         Score++;
     }
 
+    /// <summary>
+    /// <para>This method pauses and unpauses the game when ESC is pressed down.</para>
+    /// </summary>
     public void PauseGame()
     {
         if (Time.timeScale == 1)
@@ -64,6 +67,10 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// <para>This method is called when the MainCharacter leaves the play area, i.e. loosing.</para>
+    /// <para>Different operations are done to go into the game over state.</para>
+    /// </summary>
     public void GameOver()
     {
         SaveGameManager.CheckHighScore(Score);
@@ -75,6 +82,10 @@ public class LevelManager : MonoBehaviour
         gameOverPanel.SetActive(true);
     }
 
+    /// <summary>
+    /// <para>This method resets the scene as it was when it first loaded.</para>
+    /// <para>It is used to not reload the scene to minimize loading time.</para>
+    /// </summary>
     public void ResetScene()
     {
         MainCharacter.Instance.SetCharacterStartState();

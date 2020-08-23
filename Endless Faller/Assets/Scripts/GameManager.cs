@@ -39,12 +39,19 @@ public class GameManager : MonoBehaviour
         IncreasePlatformsSpeed();
     }
 
+    /// <summary>
+    /// <para>This LateStart coroutine is used right after the game starts.</para>
+    /// <para>The reasoning is that PlatformsPooler script has to first create objects before we can enable them.</para>
+    /// </summary>
     IEnumerator LateStart()
     {
         yield return new WaitForSeconds(0.01f);
         SpawnFirstMovingPlatform();
     }
 
+    /// <summary>
+    /// <para>This method spawns the first platform on game start.</para>
+    /// </summary>
     public void SpawnFirstMovingPlatform()
     {
         platformsPooler.SpawnFromPool("Platform", new Vector3(0f, -7f, 0f), Quaternion.identity);
@@ -60,17 +67,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// <para>This method gradually decreases the Platform Spawn Rate, i.e. platforms will spawn quicker.</para>
+    /// </summary>
     void DecreaseSpawnRateOfPlatforms()
     {
         spawnRate = Mathf.Clamp(spawnRate - gameSettingsSO.spawnRateDecreasePerFrame * Time.deltaTime, LOWEST_SPAWN_RATE, gameSettingsSO.initialSpawnRate);
     }
 
+    /// <summary>
+    /// <para>This method gradually increments the Platform Speed.</para>
+    /// </summary>
     public float IncreasePlatformsSpeed()
     {
         platformSpeed = Mathf.Clamp(platformSpeed + gameSettingsSO.platformSpeedIncreasePerFrame * Time.deltaTime, gameSettingsSO.initialPlatformSpeed, MAX_PLATFORM_SPEED);
         return platformSpeed;
     }
 
+    /// <summary>
+    /// <para>This method resets incremental values that affect gameplay, such as Platform Spawn Rate.</para>
+    /// </summary>
     public void ResetValues()
     {
         currentSpawnRate = gameSettingsSO.initialSpawnRate;
